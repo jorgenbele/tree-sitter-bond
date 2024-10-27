@@ -57,6 +57,10 @@
 [(struct_view . (identifier))] @type.definition
 [(enum . (identifier))] @type.definition
 
+[(struct_field . (field_name)) ] @variable.member
+[(enum_field . (identifier)) ] @variable.member
+[(struct_view_body . (identifier)) ] @variable.member
+
 [(comment)] @comment
 [(comment)] @spell
 

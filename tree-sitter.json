@@ -8,7 +8,9 @@
       "file-types": [
         "bond"
       ],
-      "injection-regex": "^bond$"
+      "injection-regex": "^bond$",
+      "highlights": "queries/highlights.scm",
+      "indents": "queries/indents.scm",
     }
   ],
   "metadata": {
