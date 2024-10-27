@@ -5,7 +5,9 @@
       "camelcase": "Bond",
       "scope": "source.bond",
       "path": ".",
-      "file-types": null,
+      "file-types": [
+        "bond"
+      ],
       "injection-regex": "^bond$"
     }
   ],
