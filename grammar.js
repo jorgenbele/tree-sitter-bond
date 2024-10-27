@@ -8,7 +8,7 @@
 // @ts-check
 //
 
-// Based on https://microsoft.github.io/bond/manual/compiler.html#idl-syntax
+// Based on spec found here: https://microsoft.github.io/bond/manual/compiler.html#idl-syntax
 
 const letter = /[a-zA-Z]/;
 const decimal_digit = /[0-9]/;
@@ -34,105 +34,128 @@ module.exports = grammar({
       )))
     ),
 
+    block_begin: $ => "{",
+    block_end: $ => "}",
+
+    // https://microsoft.github.io/bond/manual/compiler.html#namespace-definition
     namespace: $ => seq('namespace', field('path', $.full_ident)),
 
+    // https://microsoft.github.io/bond/manual/compiler.html#import-statements
     import: $ => seq('import', field('path', $.string)),
 
-    forward_decl: $ => seq('struct', $.struct_name, ';'),
+    // https://microsoft.github.io/bond/manual/compiler.html#forward-declaration
+    forward_decl: $ => seq('struct', field("name", $.identifier), ';'),
 
+    // https://microsoft.github.io/bond/manual/compiler.html#type-aliases
     using: $ => seq(
       "using",
-      $.using_defined_type,
+      field("type_alias", $.user_defined_type),
       "=",
-      $.type,
+      field("type", $.type),
       ";"
     ),
 
-    using_defined_type: $ => $.user_defined_type,
-
+    // https://microsoft.github.io/bond/manual/compiler.html#custom-attributes
     attribute: $ => seq(
       "[",
-      $.attribute_name,
+      field("name", $.identifier),
       "(",
-      $.attribute_value,
+      field("value", $.string),
       ")",
       "]",
     ),
 
-    attribute_name: $ => $.identifier,
-    attribute_value: $ => $.string,
-
-    block_begin: $ => "{",
-    block_end: $ => "}",
-
-    struct_view: $ => seq(
+    /*
+     * Struct:
+     * https://microsoft.github.io/bond/manual/compiler.html#generic-struct
+     */
+    struct: $ => seq(
       optional($.attribute),
-      "struct",
-      $.struct_name,
-      "view_of",
-      $.struct_name,
-      optional($.struct_view_body),
+      'struct',
+      field("name", $.identifier),
+      optional($.generic_type_decl),
+      optional(seq(
+        ':',
+        field("base_struct", $.identifier),
+      )),
+      optional($.struct_body),
     ),
 
-    // TODO: fix struct body
-    struct_view_body: $ => seq(
+    struct_body: $ => seq(
       $.block_begin,
-      $.identifier,
-      optional(repeat(seq(
-        ",",
-        $.identifier
-      ))),
-      ";",
-      $.block_end,
-    ),
+      $.struct_field,
+      optional(
+        repeat(
+          $.struct_field
+        )
+      ),
+      $.block_end),
 
-    enum: $ => seq(
+    struct_field: $ => seq(
       optional($.attribute),
-      'enum',
-      $.enum_name,
-      optional($.enum_body),
-    ),
-
-    enum_name: $ => $.identifier,
-
-    enum_body: $ => seq(
-        $.block_begin,
-        $.enum_field,
-        repeat(seq(
-          ",",
-          $.enum_field)),
-
-        $.block_end,
-     ),
-
-    enum_field: $ => seq(
-      // optional($.attribute),
-      $.enum_constant_name,
+      field("ordinal", $.integer),
+      ':',
+      field("type", $.type),
+      $.field_name,
       optional(
         seq(
           '=', 
           $.default_value,
         )
       ),
+      ';'
     ),
 
-    enum_constant_name: $ => $.identifier,
-
-    struct: $ => seq(
+    /*
+     * Struct view
+     */
+    struct_view: $ => seq(
       optional($.attribute),
-      'struct',
-      $.struct_name,
-      optional($.generic_type_decl),
-      optional(seq(
-        ':',
-        $.base_struct
-      )),
-      optional($.struct_body),
+      "struct",
+      field("view_name", $.identifier),
+      "view_of",
+      field("view_of_name", $.identifier),
+      optional($.struct_view_body),
     ),
 
-    base_struct: $ => $.struct_name,
+    struct_view_body: $ => seq(
+      $.block_begin,
+      commaSep(field("name", $.identifier)),
+      ";",
+      $.block_end,
+    ),
 
-    field_type: $ => $.type,
+    /*
+     * Enum:
+     * https://microsoft.github.io/bond/manual/compiler.html#enum-definition
+     */
+    enum: $ => seq(
+      optional($.attribute),
+      'enum',
+      field("name", $.identifier),
+      optional($.enum_body),
+    ),
+
+    enum_body: $ => seq(
+      $.block_begin,
+      commaSep($.enum_field),
+      $.block_end,
+    ),
+
+    enum_field: $ => seq(
+      // optional($.attribute),
+      field("constant_name", $.identifier),
+      optional(
+        seq(
+          '=', 
+          field("value", $.default_value),
+        )
+      ),
+    ),
+
+    /*
+     * Types
+     */
 
     type: $ => choice(
       $.primitive_type,
@@ -171,47 +194,15 @@ module.exports = grammar({
 
     generic_type_decl: $ => seq(
       "<",
-      $.type,
-      optional(
-        repeat(seq(
-          ",",
-          $.type,
-        ))
-      ),
+      commaSep1(field("name", $.type)),
       ">",
     ),
 
     generic_type: $ => seq(
       choice($.builtin_type, $.user_defined_type),
       "<",
-      $.type,
-      optional(
-        repeat(seq(
-          ",",
-          $.type,
-        ))
-      ),
+      commaSep1(field("type", $.type)),
       ">",
-    ),
-
-    struct_name: $ => $.identifier,
-
-    // TODO: fix struct body
-    struct_body: $ => seq($.block_begin, $.struct_field, optional(repeat($.struct_field)), $.block_end),
-
-    struct_field: $ => seq(
-      optional($.attribute),
-      $.ordinal,
-      ':',
-      $.field_type,
-      $.field_name,
-      optional(
-        seq(
-          '=', 
-          $.default_value,
-        )
-      ),
-      ';'
     ),
 
     default_value: $ => choice(
@@ -226,13 +217,11 @@ module.exports = grammar({
         letter,
         decimal_digit,
         '_',
-    )))),
+      )))),
 
     field_name: $ => $.identifier,
 
     nothing: $ => "nothing",
-
-    ordinal: $ => $.integer,
 
     integer: $ => choice(
       seq(
@@ -249,26 +238,23 @@ module.exports = grammar({
       optional(repeat(seq('.', $.identifier)))
     ),
 
-    // TODO: replace this and escape_sequence
-    // was copied from https://github.com/mitchellh/tree-sitter-proto/blob/main/grammar.js#L448
+    // String parsing was copied from tree-sitter-json
     string: $ => choice(
-      seq(
-        '"',
-        repeat(choice(
-          token.immediate(prec(1, /[^"\\]+/)),
-          $.escape_sequence
-        )),
-        '"'
-      ),
-      seq(
-        "'",
-        repeat(choice(
-          token.immediate(prec(1, /[^'\\]+/)),
-          $.escape_sequence
-        )),
-        "'",
-      ),
+      seq('"', '"'),
+      seq('"', $._string_content, '"'),
     ),
+
+    _string_content: $ => repeat1(choice(
+      $.string_content,
+      $.escape_sequence,
+    )),
+
+    string_content: _ => token.immediate(prec(1, /[^\\"\n]+/)),
+
+    escape_sequence: _ => token.immediate(seq(
+      '\\',
+      /(\"|\\|\/|b|f|n|r|t|u)/,
+    )),
 
     escape_sequence: $ => token.immediate(seq(
       '\\',
@@ -290,7 +276,6 @@ module.exports = grammar({
       ))),
     )),
 
-
     comment: $ => token(choice(
       seq('//', /.*/),
       seq(
@@ -301,3 +286,25 @@ module.exports = grammar({
     ))
   }
 });
+
+/**
+ * Creates a rule to match one or more of the rules separated by a comma
+ *
+ * @param {RuleOrLiteral} rule
+ *
+ * @returns {SeqRule}
+ */
+function commaSep1(rule) {
+  return seq(rule, repeat(seq(',', rule)));
+}
+
+/**
+ * Creates a rule to optionally match one or more of the rules separated by a comma
+ *
+ * @param {RuleOrLiteral} rule
+ *
+ * @returns {ChoiceRule}
+ */
+function commaSep(rule) {
+  return optional(commaSep1(rule));
+}
