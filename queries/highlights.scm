@@ -26,7 +26,7 @@
 
 [ (attribute) ] @attribute
 
-[ (struct_field_required_variant) ] @type.special
+[ (struct_field_required_variant) ] @keyword
 
 [
  (builtin_type)
@@ -45,6 +45,8 @@
 
 [
   ","
+  ";"
+  "."
 ] @punctuation.delimiter
 
 (integer) @number
@@ -63,4 +65,3 @@
 
 [(comment)] @comment
 [(comment)] @spell
-
