@@ -82,7 +82,6 @@ module.exports = grammar({
 
     struct_body: $ => seq(
       $.block_begin,
-      $.struct_field,
       optional(
         repeat(
           $.struct_field
