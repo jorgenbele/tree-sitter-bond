@@ -1,0 +1,25 @@
+===============================================================================
+Parsing goal
+===============================================================================
+namespace A
+struct WithBase : Base {
+  0: int field;
+}
+-------------------------------------------------------------------------------
+
+(source_file
+  (namespace
+    (full_ident
+      (identifier)))
+  (struct
+    (identifier)
+    (identifier)
+    (struct_body
+      (block_begin)
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (block_end))))

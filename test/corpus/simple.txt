@@ -1,0 +1,44 @@
+===============================================================================
+Parsing goal
+===============================================================================
+/*
+* This is a multi-line comment
+*/
+
+// This is a single-line comment
+
+// This defined the namespace for this bond file
+namespace SampleNamespace.Test
+
+// This is an import statement
+import "../some/place"
+
+struct MyStruct {
+  0: int Field;
+}
+
+-------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (comment)
+  (comment)
+  (namespace
+    (full_ident
+      (identifier)
+      (identifier)))
+  (comment)
+  (import
+    (string
+      (string_content)))
+  (struct
+    (identifier)
+    (struct_body
+      (block_begin)
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (block_end))))

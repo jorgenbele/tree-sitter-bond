@@ -1,0 +1,88 @@
+===============================================================================
+Parsing goal
+===============================================================================
+namespace A
+struct GenericStruct<A, B> {
+  0: A FieldA;
+  1: B FieldA;
+  2: optional<A> OptionalA;
+  3: optional<B> OptionalB;
+  4: nullable<A> NullableA;
+  5: nullable<B> NullableB;
+}
+-------------------------------------------------------------------------------
+
+(source_file
+  (namespace
+    (full_ident
+      (identifier)))
+  (struct
+    (identifier)
+    (generic_type_decl
+      (type
+        (user_defined_type
+          (identifier)))
+      (type
+        (user_defined_type
+          (identifier))))
+    (struct_body
+      (block_begin)
+      (struct_field
+        (integer)
+        (type
+          (user_defined_type
+            (identifier)))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (user_defined_type
+            (identifier)))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (user_defined_type
+                (identifier)))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (user_defined_type
+                (identifier)))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (user_defined_type
+                (identifier)))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (user_defined_type
+                (identifier)))))
+        (field_name
+          (identifier)))
+      (block_end))))

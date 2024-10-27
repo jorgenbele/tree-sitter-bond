@@ -1,0 +1,21 @@
+===============================================================================
+Parsing goal
+===============================================================================
+namespace A
+
+using VectorOfInt = vector<int>;
+-------------------------------------------------------------------------------
+
+(source_file
+  (namespace
+    (full_ident
+      (identifier)))
+  (using
+    (user_defined_type
+      (identifier))
+    (type
+      (generic_type
+        (builtin_type
+          (container_type))
+        (type
+          (primitive_type))))))

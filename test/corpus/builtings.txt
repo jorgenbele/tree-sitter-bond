@@ -1,0 +1,201 @@
+===============================================================================
+Parsing goal
+===============================================================================
+namespace A
+
+// Forward declaration
+struct A;
+
+struct A {
+ 0: string String;
+ 1: int Int;
+ 2: uint8 Uint8;
+ 3: uint8 Uint8;
+ 4: int32 Int32;
+ 5: int64 Int64;
+ 6: uint32 Uint32;
+ 7: uint64 Uint64;
+ 8: bonded<A> ABonded;
+ 9: map<string, string> Map;
+ 10: set<string> Set;
+ 11: map<int, string> Map2;
+ 12: set<int> Set2;
+ 13: vector<int> Vector;
+ 14: list<int> List;
+ 15: maybe<int> Maybe;
+ 16: float Float;
+ 17: double Double;
+ 18: bool Bool;
+ 19: wstring WString;
+}
+-------------------------------------------------------------------------------
+
+(source_file
+  (namespace
+    (full_ident
+      (identifier)))
+  (comment)
+  (forward_decl
+    (identifier))
+  (struct
+    (identifier)
+    (struct_body
+      (block_begin)
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (user_defined_type
+                (identifier)))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (primitive_type))
+            (type
+              (primitive_type))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (primitive_type))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (primitive_type))
+            (type
+              (primitive_type))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (primitive_type))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (primitive_type))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (primitive_type))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (primitive_type))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (block_end))))

@@ -1,0 +1,43 @@
+===============================================================================
+Parsing goal
+===============================================================================
+namespace A
+
+struct A {
+ 0: int Field1;
+ 1: int Field2;
+}
+
+struct ViewOfA view_of A {
+  Field1;
+}
+-------------------------------------------------------------------------------
+
+(source_file
+  (namespace
+    (full_ident
+      (identifier)))
+  (struct
+    (identifier)
+    (struct_body
+      (block_begin)
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (block_end)))
+  (struct_view
+    (identifier)
+    (identifier)
+    (struct_view_body
+      (block_begin)
+      (identifier)
+      (block_end))))

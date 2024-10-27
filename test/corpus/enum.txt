@@ -1,0 +1,25 @@
+===============================================================================
+Parsing goal
+===============================================================================
+namespace A
+enum Enumeration {
+  A,
+  B = 1
+}
+-------------------------------------------------------------------------------
+
+(source_file
+  (namespace
+    (full_ident
+      (identifier)))
+  (enum
+    (identifier)
+    (enum_body
+      (block_begin)
+      (enum_field
+        (identifier))
+      (enum_field
+        (identifier)
+        (default_value
+          (integer)))
+      (block_end))))

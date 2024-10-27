@@ -1,0 +1,232 @@
+===============================================================================
+Parsing goal
+===============================================================================
+/*
+* This is a multi-line comment
+*/
+
+// This is a single-line comment
+
+// This defined the namespace for this bond file
+namespace SampleNamespace.Test
+
+// This is an import statement
+import "../test/test"
+
+// This is an example of forward declaration 
+struct SampleStruct;
+
+// This is an example of using type aliases
+using ListOfInts = list<int>;
+
+// This is an example of using creating a generic type
+struct SampleStruct<A, B> : Base {
+	0: string SampleField = nothing;
+	1: int test;
+	2: optional<string> test;
+	3: uint32 test;
+	4: map<string, int> map;
+	5: bonded<SampleStruct> bonded;
+
+	// This is an attribute
+	[Validate("true")]
+	6: nullable<SampleStruct> bonded2;
+	7: nullable<bonded<string>> bondedOptional;
+}
+
+struct SimpleView view_of SampleStruct {
+	SampleField, bonded;
+}
+
+// This is an attribute on a struct
+[Test("True")]
+struct StructWithAttribute {
+	0: set<string> Strings;
+}
+
+enum SimpleEnumeration {
+	TCP,
+	UDP = 10
+}
+
+struct UsingEnumeration {
+	0: SimpleEnumeration value = TCP;
+}
+
+-------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (comment)
+  (comment)
+  (namespace
+    (full_ident
+      (identifier)
+      (identifier)))
+  (comment)
+  (import
+    (string
+      (string_content)))
+  (comment)
+  (forward_decl
+    (identifier))
+  (comment)
+  (using
+    (user_defined_type
+      (identifier))
+    (type
+      (generic_type
+        (builtin_type
+          (container_type))
+        (type
+          (primitive_type)))))
+  (comment)
+  (struct
+    (identifier)
+    (generic_type_decl
+      (type
+        (user_defined_type
+          (identifier)))
+      (type
+        (user_defined_type
+          (identifier))))
+    (identifier)
+    (struct_body
+      (block_begin)
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier))
+        (default_value
+          (nothing)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (primitive_type))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (primitive_type))
+            (type
+              (primitive_type))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (user_defined_type
+                (identifier)))))
+        (field_name
+          (identifier)))
+      (comment)
+      (struct_field
+        (attribute
+          (identifier)
+          (string
+            (string_content)))
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (user_defined_type
+                (identifier)))))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (generic_type
+                (builtin_type
+                  (container_type))
+                (type
+                  (primitive_type))))))
+        (field_name
+          (identifier)))
+      (block_end)))
+  (struct_view
+    (identifier)
+    (identifier)
+    (struct_view_body
+      (block_begin)
+      (identifier)
+      (identifier)
+      (block_end)))
+  (comment)
+  (struct
+    (attribute
+      (identifier)
+      (string
+        (string_content)))
+    (identifier)
+    (struct_body
+      (block_begin)
+      (struct_field
+        (integer)
+        (type
+          (generic_type
+            (builtin_type
+              (container_type))
+            (type
+              (primitive_type))))
+        (field_name
+          (identifier)))
+      (block_end)))
+  (enum
+    (identifier)
+    (enum_body
+      (block_begin)
+      (enum_field
+        (identifier))
+      (enum_field
+        (identifier)
+        (default_value
+          (integer)))
+      (block_end)))
+  (struct
+    (identifier)
+    (struct_body
+      (block_begin)
+      (struct_field
+        (integer)
+        (type
+          (user_defined_type
+            (identifier)))
+        (field_name
+          (identifier))
+        (default_value
+          (enum_constant)))
+      (block_end))))
