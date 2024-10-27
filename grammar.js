@@ -6,7 +6,6 @@
 
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
-//
 
 // Based on spec found here: https://microsoft.github.io/bond/manual/compiler.html#idl-syntax
 
