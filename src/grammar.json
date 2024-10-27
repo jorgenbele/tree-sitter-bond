@@ -6,10 +6,6 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "namespace"
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
@@ -17,6 +13,10 @@
               "content": {
                 "type": "CHOICE",
                 "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "namespace"
+                  },
                   {
                     "type": "SYMBOL",
                     "name": "import"

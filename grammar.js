@@ -20,9 +20,9 @@ module.exports = grammar({
   rules: {
     // Syntax:
     source_file: $ => seq(
-      $.namespace,
       optional(repeat(choice(
-        $.import
+        $.namespace,
+        $.import,
       ))),
       optional(repeat(choice(
         $.using,
