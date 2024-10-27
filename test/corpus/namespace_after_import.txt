@@ -1,0 +1,31 @@
+===============================================================================
+Parsing goal
+===============================================================================
+import "A"
+namespace Test.A.B
+enum Enumeration {
+  A,
+  B = 1
+}
+-------------------------------------------------------------------------------
+
+(source_file
+  (import
+    (string
+      (string_content)))
+  (namespace
+    (full_ident
+      (identifier)
+      (identifier)
+      (identifier)))
+  (enum
+    (identifier)
+    (enum_body
+      (block_begin)
+      (enum_field
+        (identifier))
+      (enum_field
+        (identifier)
+        (default_value
+          (integer)))
+      (block_end))))
