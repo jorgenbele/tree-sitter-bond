@@ -7,9 +7,7 @@
 
 [ "namespace" ] @keyword.namespace
 
-[
-  "import"
-] @keyword.import
+[ "import" ] @keyword.import
 
 [
   (struct . (identifier))
@@ -27,6 +25,8 @@
 [ (default_value) ] @constant
 
 [ (attribute) ] @attribute
+
+[ (struct_field_required_variant) ] @type.special
 
 [
  (builtin_type)
