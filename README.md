@@ -1,5 +1,7 @@
 # Tree-sitter grammar for Bond schemas
 
+[![CI](https://github.com/jorgenbele/tree-sitter-bond/actions/workflows/ci.yml/badge.svg)](https://github.com/jorgenbele/tree-sitter-bond/actions/workflows/ci.yml)
+
 A [Tree-sitter](https://github.com/tree-sitter/tree-sitter) grammar for the Microsoft [Bond](https://github.com/microsoft/bond) schema file format.
 
 Contains highlights and indent queries for use in editors in `queries/`. Tested on Neovim.
@@ -14,7 +16,7 @@ The grammar supports the following more advanced Bond features:
 - Generics
 
 ## How to use in Neovim
-Add the following to your `init.lua`.
+Add the following to your `init.lua`:
 
 ```lua
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
@@ -39,3 +41,5 @@ vim.filetype.add({
   },
 })
 ```
+
+And install Tree-sitter parser for Bond using: `:TSInstall bond`
