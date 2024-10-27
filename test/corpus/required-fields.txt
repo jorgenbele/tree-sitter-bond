@@ -1,0 +1,42 @@
+===============================================================================
+Parsing goal
+===============================================================================
+
+// Test that required variants work
+struct WithRequired{
+	0: required string SampleField = nothing;
+	1: optional int test;
+	2: required_optional uint32 test;
+}
+-------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (struct
+    (identifier)
+    (struct_body
+      (block_begin)
+      (struct_field
+        (integer)
+        (struct_field_required_variant)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier))
+        (default_value
+          (nothing)))
+      (struct_field
+        (integer)
+        (struct_field_required_variant)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (struct_field
+        (integer)
+        (struct_field_required_variant)
+        (type
+          (primitive_type))
+        (field_name
+          (identifier)))
+      (block_end))))

@@ -334,12 +334,38 @@
           "value": ":"
         },
         {
-          "type": "FIELD",
-          "name": "type",
-          "content": {
-            "type": "SYMBOL",
-            "name": "type"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "required_variant",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "struct_field_required_variant"
+                  }
+                },
+                {
+                  "type": "FIELD",
+                  "name": "type",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "type"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "type"
+              }
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -369,6 +395,23 @@
         {
           "type": "STRING",
           "value": ";"
+        }
+      ]
+    },
+    "struct_field_required_variant": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "required"
+        },
+        {
+          "type": "STRING",
+          "value": "required_optional"
+        },
+        {
+          "type": "STRING",
+          "value": "optional"
         }
       ]
     },

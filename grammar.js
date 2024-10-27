@@ -93,7 +93,13 @@ module.exports = grammar({
       optional($.attribute),
       field("ordinal", $.integer),
       ':',
-      field("type", $.type),
+      choice(
+        seq(
+          field("required_variant", $.struct_field_required_variant),
+          field("type", $.type),
+        ),
+        field("type", $.type),
+      ),
       $.field_name,
       optional(
         seq(
@@ -102,6 +108,13 @@ module.exports = grammar({
         )
       ),
       ';'
+    ),
+
+    // https://microsoft.github.io/bond/manual/bond_cpp.html#required-fields
+    struct_field_required_variant: $ => choice(
+      "required",
+      "required_optional",
+      "optional"
     ),
 
     /*

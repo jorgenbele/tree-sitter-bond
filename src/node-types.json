@@ -430,6 +430,16 @@
           }
         ]
       },
+      "required_variant": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "struct_field_required_variant",
+            "named": true
+          }
+        ]
+      },
       "type": {
         "multiple": false,
         "required": true,
@@ -459,6 +469,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "struct_field_required_variant",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "struct_view",
@@ -724,6 +739,14 @@
   },
   {
     "type": "optional",
+    "named": false
+  },
+  {
+    "type": "required",
+    "named": false
+  },
+  {
+    "type": "required_optional",
     "named": false
   },
   {
