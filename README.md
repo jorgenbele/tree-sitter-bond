@@ -42,4 +42,12 @@ vim.filetype.add({
 })
 ```
 
-And install Tree-sitter parser for Bond using: `:TSInstall bond`
+Install Tree-sitter parser for Bond using: `:TSInstall bond`
+
+For highlighting neovim needs access to the highlighting queries. Until this is merged in [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) it can be done manually by running the following from this root directory.
+
+```bash
+mkdir -p ~/.config/nvim/after/queries/bond
+cp queries/* ~/.config/nvim/after/queries/bond/
+```
+
